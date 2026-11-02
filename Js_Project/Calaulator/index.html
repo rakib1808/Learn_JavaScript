@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphic Calculator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-[#22252d] flex justify-center items-center h-screen m-0 select-none">
+
+    <div class="bg-[#22252d] p-6 rounded-[32px] shadow-[25px_25px_50px_#1d1f26,-25px_-25px_50px_#272b34] w-[300px]">
+        
+        <div class="w-full mb-6 pt-8 px-4">
+            <input type="text" id="display" readonly 
+                class="w-full text-right text-4xl text-white font-light bg-transparent outline-none border-none pointer-events-none" 
+                placeholder="0">
+        </div>
+
+        <div class="grid grid-cols-4 gap-y-5 gap-x-4 justify-items-center">
+
+            <button onclick="clearDisplay()" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-semibold bg-[#22252d] text-[#4ade80] shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">AC</button>
+            <button onclick="deleteLast()" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-semibold bg-[#22252d] text-[#4ade80] shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">DE</button>
+            <button onclick="appendValue('%')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-semibold bg-[#22252d] text-[#4ade80] shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">%</button>
+            <button onclick="appendValue('/')" class="w-12 h-12 flex items-center justify-center rounded-full text-lg font-semibold bg-[#22252d] text-[#4ade80] shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">/</button>
+
+            <button onclick="appendValue('7')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">7</button>
+            <button onclick="appendValue('8')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">8</button>
+            <button onclick="appendValue('9')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">9</button>
+            <button onclick="appendValue('*')" class="w-12 h-12 flex items-center justify-center rounded-full text-lg font-semibold bg-[#22252d] text-[#4ade80] shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">*</button>
+
+            <button onclick="appendValue('4')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">4</button>
+            <button onclick="appendValue('5')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">5</button>
+            <button onclick="appendValue('6')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">6</button>
+            <button onclick="appendValue('-')" class="w-12 h-12 flex items-center justify-center rounded-full text-xl font-semibold bg-[#22252d] text-[#4ade80] shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">-</button>
+
+            <button onclick="appendValue('1')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">1</button>
+            <button onclick="appendValue('2')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">2</button>
+            <button onclick="appendValue('3')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">3</button>
+            <button onclick="appendValue('+')" class="w-12 h-12 flex items-center justify-center rounded-full text-lg font-semibold bg-[#22252d] text-[#4ade80] shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">+</button>
+
+            <button onclick="appendValue('00')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">00</button>
+            <button onclick="appendValue('0')" class="w-12 h-12 flex items-center justify-center rounded-full text-base font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">0</button>
+            <button onclick="appendValue('.')" class="w-12 h-12 flex items-center justify-center rounded-full text-lg font-normal bg-[#22252d] text-gray-300 shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_#1a1c22,inset_-4px_-4px_8px_#2a2e38] transition-all duration-100">.</button>
+            <button onclick="calculate()" class="w-12 h-12 flex items-center justify-center rounded-full text-xl font-bold bg-[#ff7a00] text-white shadow-[6px_6px_12px_#1a1c22,-6px_-6px_12px_#2a2e38] active:shadow-[inset_4px_4px_8px_rgba(0,0,0,0.3)] transition-all duration-100">=</button>
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const display = document.getElementById('display');
+
+        function appendValue(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculate() {
+            try {
+                if (display.value !== '') {
+                    // (%) 
+                    let expression = display.value.replace(/%/g, '/100');
+                    display.value = eval(expression);
+                }
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
